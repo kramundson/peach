@@ -1,0 +1,18 @@
+from Bio import SeqIO
+import re
+import pandas as pd # (probably do not need)
+shell.executable("bash")
+
+configfile: "config.yaml"
+
+rule all:
+    input:
+        config["genome"],
+        config["genome"]+".bwt",
+        config["genome"]+".fai",
+        re.sub("(\.fasta$|\.fa$)", ".genome", config["genome"]),
+        re.sub("(\.fasta$|\.fa$)", ".dict", config["genome"])
+
+include: "rules/bwa_index.rules"
+include: "rules/create_sequence_dictionary.rules"
+include: "rules/samtools_faidx.rules"
