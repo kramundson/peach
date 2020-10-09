@@ -1,0 +1,3 @@
+data/
+ref/*.fasta*
+.snakemake/
